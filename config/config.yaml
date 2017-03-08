@@ -8,3 +8,5 @@ redis_uname: root
 redis_pass: ""
 redis_port: 5555 
 pg_ip: 192.168.59.103
+
+app_port: 8080
