@@ -3,6 +3,7 @@ package reply
 import (
 	"encoding/json"
 	"fmt"
+	"galore/config"
 	"net/http"
 	"runtime/debug"
 
@@ -30,6 +31,10 @@ func OK(w http.ResponseWriter, data interface{}) {
 func Err(w http.ResponseWriter, e *ae.Error) {
 	log.Err(*e)
 	log.Err(string(debug.Stack()))
+	// Unset error logging if prod
+	if env, ok := config.GetString("app_env"); ok && env != "prod" {
+		e.Log = ""
+	}
 	jsonData, err := json.Marshal(e)
 	if err != nil {
 		fmt.Fprint(w, "Error")
