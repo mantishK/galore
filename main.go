@@ -1,8 +1,12 @@
 package main
 
 import (
+	"log"
 	"net/http"
 	"os"
+	"strconv"
+
+	"github.com/mantishK/galore/config"
 
 	"github.com/julienschmidt/httprouter"
 	"github.com/mantishK/galore/handler"
@@ -29,6 +33,12 @@ func main() {
 	router.Handler("POST", apiNS+"/todo", m.Adapt(handler.PostTodo, m.AccessLog(), m.Authorize()))
 	router.Handler("PUT", apiNS+"/todo", m.Adapt(handler.PutTodo, m.AccessLog(), m.Authorize()))
 	router.Handler("DELETE", apiNS+"/todo", m.Adapt(handler.DeleteTodo, m.AccessLog(), m.Authorize()))
+	appPort := 8080
+	if p, ok := config.GetInt("app_port"); ok {
+		appPort = p
+	}
+	if err := http.ListenAndServe(":"+strconv.Itoa(appPort), router); err != nil {
+		log.Fatal("Unable to start server", err)
+	}
 
-	http.ListenAndServe(":8080", router)
 }
