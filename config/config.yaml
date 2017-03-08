@@ -1,0 +1,10 @@
+pg_uname: postgres
+pg_pass: ""
+pg_name: todo
+pg_ip: 192.168.59.103
+pg_port: 5432
+
+redis_uname: root
+redis_pass: ""
+redis_port: 5555 
+pg_ip: 192.168.59.103
