@@ -34,7 +34,7 @@ SET default_with_oids = false;
 --
 
 CREATE TABLE todos (
-    id integer,
+    id SERIAL PRIMARY KEY,
     content text,
     user_id integer,
     created timestamp without time zone,
@@ -63,7 +63,7 @@ ALTER TABLE user_token OWNER TO postgres;
 --
 
 CREATE TABLE users (
-    user_id integer,
+    user_id SERIAL PRIMARY KEY,
     user_name character varying(255),
     password character varying(1024),
     created timestamp without time zone,
@@ -94,7 +94,6 @@ COPY user_token (user_id, token, created, modified) FROM stdin;
 --
 
 COPY users (user_id, user_name, password, created, modified) FROM stdin;
-\N  monty@gmail.com Vmtaak5XUlhVa2xpUlVaT1ZrVnNObGRyVWtaTlJteHlVMnBLVDFaWFNsRmFlWFJHVFZkYU1VdDZVakphYTFwV1V6QmFSVll5U2xwUlZXZDRZVlZTY2xGc1JqQlhSVnByWlZWUk5WTXlkRzlOUkVvMlkwaHdjbHBzUlhkV1NHaHJZVWRhVEdSNU9EQlVWbXQzWWpKUmNrNHdUVFZoYmxaVlVucHNVMDFGV1RKYU1rWldUa1V4ZFdOcVZrdFBWemh5V2tSRk1GbHJTakpPVldKUVp5dEZNV1oxS3pSMlprWlZTMFpFVjJKWlFVZ3hhVVJyUWxGMFdFWmtlVVE1UzJ0b01ESjZjSHByWmxFd1ZIaGthR1pMZHk4MFRWa3diMlFyTjBNNWFuVlVSemxTTUVZMloyRlZORTF1Y2pWS09XOHJaREUwWWtKMk5VYlBnK0UxZnUrNHZmRlVLRkRXYllBSDFpRGtCUXRYRmR5RDlLa2gwMnpwemtmUTBUeGRoZkt3LzRNWTBvZCs3QzlqdVRHOVIwRjZnYVU0TW5yNUo5bytkMTRiQnY1Rs+D4TV+77i98VQoUNZtgAfWIOQFC1cV3IP0qSHTbOnOR9DRPF2F8rD/gxjSh37sL2O5Mb1HQXqBpTgyevkn2j4=.d14bBv5F 2015-07-17 21:58:24.953304  2015-07-17 21:58:24.953304
 \.
 
 
