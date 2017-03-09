@@ -3,11 +3,11 @@ package reply
 import (
 	"encoding/json"
 	"fmt"
-	"galore/config"
 	"net/http"
 	"runtime/debug"
 
 	ae "github.com/mantishK/galore/apperror"
+	"github.com/mantishK/galore/config"
 	"github.com/mantishK/galore/log"
 )
 
@@ -24,7 +24,6 @@ func OK(w http.ResponseWriter, data interface{}) {
 		Err(w, ae.JsonEncode(""))
 	}
 	w.Header().Set("Content-Type", "application/json")
-
 	fmt.Fprint(w, string(jsonData))
 }
 
