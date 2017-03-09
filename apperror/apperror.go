@@ -117,11 +117,11 @@ func JsonEncode(message string) *Error {
 	return &Error{ID: CodeJsonEncode, Message: message, HttpStatus: http.StatusInternalServerError}
 }
 
-func JsonDecode(message string) *Error {
+func JsonDecode(message string, err error) *Error {
 	if len(message) == 0 {
 		message = "Something went wrong while decoding json"
 	}
-	return &Error{ID: CodeJsonDecode, Message: message, HttpStatus: http.StatusInternalServerError}
+	return &Error{ID: CodeJsonDecode, Message: message, HttpStatus: http.StatusInternalServerError, Log: err.Error()}
 }
 
 func Forbidden(message string) *Error {

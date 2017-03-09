@@ -13,7 +13,7 @@ type ok interface {
 
 func decode(r *http.Request, v interface{}) *ae.Error {
 	if err := json.NewDecoder(r.Body).Decode(v); err != nil {
-		return ae.JsonDecode("")
+		return ae.JsonDecode("", err)
 	}
 	if validatable, ok := v.(ok); ok {
 		return validatable.OK()

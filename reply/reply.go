@@ -31,7 +31,7 @@ func Err(w http.ResponseWriter, e *ae.Error) {
 	log.Err(*e)
 	log.Err(string(debug.Stack()))
 	// Unset error logging if prod
-	if env, ok := config.GetString("app_env"); ok && env != "prod" {
+	if env, ok := config.GetString("app_env"); ok && env == "prod" {
 		e.Log = ""
 	}
 	jsonData, err := json.Marshal(e)

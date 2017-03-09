@@ -85,6 +85,7 @@ func PostTodo(w http.ResponseWriter, r *http.Request) {
 	aErr := decode(r, &rb)
 	if aErr != nil {
 		reply.Err(w, aErr)
+		return
 	}
 
 	todo := model.Todo{UserID: userID, Content: rb.Content}
@@ -109,6 +110,7 @@ func PutTodo(w http.ResponseWriter, r *http.Request) {
 	aErr := decode(r, &rb)
 	if aErr != nil {
 		reply.Err(w, aErr)
+		return
 	}
 
 	id := r.URL.Query().Get("id")

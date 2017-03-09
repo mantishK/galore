@@ -20,6 +20,7 @@ func GetUser(w http.ResponseWriter, r *http.Request) {
 		userID, err = strconv.Atoi(id)
 		if err != nil {
 			reply.Err(w, ae.InvalidInput("id is not a number", "id"))
+			return
 		}
 	}
 
@@ -153,6 +154,7 @@ func SignOut(w http.ResponseWriter, r *http.Request) {
 	err := userToken.Delete()
 	if err != nil {
 		reply.Err(w, ae.DB("", err))
+		return
 	}
 	result := make(map[string]interface{})
 	result["user_token"] = userToken.Token
