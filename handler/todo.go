@@ -5,14 +5,13 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/gorilla/context"
 	ae "github.com/mantishK/galore/apperror"
 	"github.com/mantishK/galore/model"
 	"github.com/mantishK/galore/reply"
 )
 
 func GetUserTodos(w http.ResponseWriter, r *http.Request) {
-	userID := context.Get(r, "user_id").(int)
+	userID := r.Context().Value("user_id").(int)
 	todo := model.Todo{}
 
 	todo.UserID = userID
@@ -30,7 +29,7 @@ func GetUserTodos(w http.ResponseWriter, r *http.Request) {
 }
 
 func GetTodo(w http.ResponseWriter, r *http.Request) {
-	userID := context.Get(r, "user_id").(int)
+	userID := r.Context().Value("user_id").(int)
 	todo := model.Todo{}
 
 	id := r.URL.Query().Get("id")
@@ -79,7 +78,7 @@ func (rb *todoReqBody) OK() *ae.Error {
 }
 
 func PostTodo(w http.ResponseWriter, r *http.Request) {
-	userID := context.Get(r, "user_id").(int)
+	userID := r.Context().Value("user_id").(int)
 
 	var rb todoReqBody
 
@@ -103,7 +102,7 @@ func PostTodo(w http.ResponseWriter, r *http.Request) {
 }
 
 func PutTodo(w http.ResponseWriter, r *http.Request) {
-	userID := context.Get(r, "user_id").(int)
+	userID := r.Context().Value("user_id").(int)
 
 	var rb todoReqBody
 
@@ -153,7 +152,7 @@ func PutTodo(w http.ResponseWriter, r *http.Request) {
 }
 
 func DeleteTodo(w http.ResponseWriter, r *http.Request) {
-	userID := context.Get(r, "user_id").(int)
+	userID := r.Context().Value("user_id").(int)
 	id := r.URL.Query().Get("id")
 	if len(id) == 0 {
 		reply.Err(w, ae.Required("id required", "id"))

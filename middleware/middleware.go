@@ -1,10 +1,10 @@
 package middleware
 
 import (
+	"context"
 	"net/http"
 	"time"
 
-	"github.com/gorilla/context"
 	ae "github.com/mantishK/galore/apperror"
 	al "github.com/mantishK/galore/log"
 	"github.com/mantishK/galore/model"
@@ -60,9 +60,9 @@ func Authorize() Adapter {
 				reply.Err(w, ae.TokenExpired(""))
 				return
 			}
-			context.Set(r, "user_id", userToken.UserId)
-			context.Set(r, "user_token", userToken.Token)
-			h.ServeHTTP(w, r)
+			ctx := context.WithValue(r.Context(), "user_id", userToken.UserId)
+			ctx = context.WithValue(ctx, "user_token", userToken.Token)
+			h.ServeHTTP(w, r.WithContext(ctx))
 		})
 	}
 }

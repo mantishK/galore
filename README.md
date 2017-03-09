@@ -10,7 +10,6 @@ A todo app backend in Go, written in an attempt to demonstrate a minimalistic an
 * Logging
 
 ## Dependencies
-* github.com/gorilla/context
 * github.com/julienschmidt/httprouter
 * gopkg.in/yaml.v2
 

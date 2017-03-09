@@ -5,7 +5,6 @@ import (
 	"net/http"
 	"strconv"
 
-	"github.com/gorilla/context"
 	ae "github.com/mantishK/galore/apperror"
 	"github.com/mantishK/galore/model"
 	"github.com/mantishK/galore/reply"
@@ -13,7 +12,7 @@ import (
 )
 
 func GetUser(w http.ResponseWriter, r *http.Request) {
-	userID := context.Get(r, "user_id").(int)
+	userID := r.Context().Value("user_id").(int)
 	var err error
 
 	id := r.URL.Query().Get("id")
@@ -150,7 +149,7 @@ func signinWithUserName(reqBody userReqBody) (string, *ae.Error) {
 
 func SignOut(w http.ResponseWriter, r *http.Request) {
 	userToken := model.UserToken{}
-	userToken.Token = context.Get(r, "user_token").(string)
+	userToken.Token = r.Context().Value("user_token").(string)
 	err := userToken.Delete()
 	if err != nil {
 		reply.Err(w, ae.DB("", err))
